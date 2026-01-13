@@ -1,0 +1,68 @@
+name: DevOps CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-monolith:
+    name: Build Monolithic App
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Build Monolith Docker Image
+        run: |
+          cd monolith-app
+          docker build -t monolith-app .
+          echo "✅ Monolith build successful!"
+
+  build-user-service:
+    name: Build User Service
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Build User Service Docker Image
+        run: |
+          cd microservices/user-service
+          docker build -t user-service .
+          echo "✅ User Service build successful!"
+
+  build-product-service:
+    name: Build Product Service
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Build Product Service Docker Image
+        run: |
+          cd microservices/product-service
+          docker build -t product-service .
+          echo "✅ Product Service build successful!"
+
+  build-order-service:
+    name: Build Order Service
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Build Order Service Docker Image
+        run: |
+          cd microservices/order-service
+          docker build -t order-service .
+          echo "✅ Order Service build successful!"
+
+  build-api-gateway:
+    name: Build API Gateway
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Build API Gateway Docker Image
+        run: |
+          cd api-gateway
+          docker build -t api-gateway .
+          echo "✅ API Gateway build successful!"
