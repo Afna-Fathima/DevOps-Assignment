@@ -1,0 +1,13 @@
+name: User Service CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build User Service Docker Image
+        run: docker build -t user-service ./microservices/user-service

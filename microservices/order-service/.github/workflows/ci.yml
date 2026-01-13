@@ -1,0 +1,13 @@
+name: Order Service CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build Order Service Docker Image
+        run: docker build -t order-service ./microservices/order-service

@@ -1,0 +1,10 @@
+name: Monolith CI/CD
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Build Monolith Docker Image
+        run: docker build -t monolith-app ./monolith-app
